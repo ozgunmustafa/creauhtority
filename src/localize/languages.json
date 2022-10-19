@@ -1,0 +1,60 @@
+{
+  "en": {
+    "translation": {
+      "placeholder": "Please fill the {{inputName}} field",
+      "introText": "Content App",
+      "comment": "Comment",
+      "share": "Share",
+      "bookmark": "Bookmark",
+      "like": "Like",
+      "theme": "Theme",
+      "login": "Sign In",
+      "email": "Email",
+      "password": {
+        "key": "Password",
+        "confirmation": "Password Confirmation"
+      },
+      "sectionTitle": {
+        "highlightCreators": "Highlight Creators",
+        "releatedPosts": "Releated Posts",
+        "popularCategories": "Popular Categories",
+        "comments": "Comments"
+      },
+      "validation": {
+        "required": "{{inputName}} field is required",
+        "invalid": "Please enter a valid {{inputName}} value",
+        "minLength": "This field needs at least {{count}} characters",
+        "maxLength": "This field needs at most {{count}} characters"
+      }
+    }
+  },
+  "tr": {
+    "translation": {
+      "placeholder": "Lütfen {{inputName}} bilgisini giriniz.",
+      "introText": "İçerik Uygulaması",
+      "comment": "Yorum",
+      "share": "Paylaş",
+      "bookmark": "Yer İşareti",
+      "like": "Beğeni",
+      "theme": "Tema",
+      "login": "Giriş Yap",
+      "email": "Eposta",
+      "password": {
+        "key": "Şifre",
+        "confirmation": "Şifre Doğrulama"
+      },
+      "sectionTitle": {
+        "highlightCreators": "Öne Çıkan Yazarlar",
+        "releatedPosts": "Benzer İçerikler",
+        "popularCategories": "Popüler Kategoriler",
+        "comments": "Yorumlar"
+      },
+      "validation": {
+        "required": "{{inputName}} alanı gereklidir.",
+        "invalid": "Geçerli bir {{inputName}} değeri giriniz.",
+        "minLength": "Minimum {{count}} karakter uzunluğunda olmalıdır.",
+        "maxLength": "Maximum {{count}} karakter uzunluğunda olabilir."
+      }
+    }
+  }
+}
