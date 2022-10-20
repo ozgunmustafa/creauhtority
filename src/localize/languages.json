@@ -17,6 +17,7 @@
       "sectionTitle": {
         "highlightCreators": "Highlight Creators",
         "releatedPosts": "Releated Posts",
+        "highlightCategories": "Releated Categories",
         "popularCategories": "Popular Categories",
         "comments": "Comments"
       },
@@ -46,6 +47,7 @@
       "sectionTitle": {
         "highlightCreators": "Öne Çıkan Yazarlar",
         "releatedPosts": "Benzer İçerikler",
+        "highlightCategories": "Öne Çıkan Kategoriler",
         "popularCategories": "Popüler Kategoriler",
         "comments": "Yorumlar"
       },

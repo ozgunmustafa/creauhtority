@@ -17,6 +17,7 @@ import { getHomeFlood } from '../features/post/PostSlice';
 const Home = () => {
   const dispatch = useDispatch();
   const { featuredCategories } = useSelector((state) => state.categories);
+
   const {
     floodPosts,
     loading: postsLoading,
@@ -63,7 +64,11 @@ const Home = () => {
                 <PostPlaceholder key={'ctg-plchldr' + i} />
               ))
             : floodPosts?.map((post) => (
-                <PostCard post={post} key={`flood-${post._id}`} />
+                <PostCard
+                  post={post}
+                  key={`flood-${post._id}`}
+                  className=" border-gray-200 hover:border-gray-400"
+                />
               ))}
         </section>
       </FloodLayout>

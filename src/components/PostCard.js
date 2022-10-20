@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { likePost } from '../features/post/PostSlice';
 
-const PostCard = ({ post, isPostIndex }) => {
+const PostCard = ({ post, isPostIndex, isUserIndex, className }) => {
   const { t } = useTranslation();
   const { authenticatedUser } = useSelector((state) => state.auth);
 
@@ -22,7 +22,7 @@ const PostCard = ({ post, isPostIndex }) => {
   const isUserLikedPost = (postt) => {
     post.likes.map((like) => {
       console.log('1xasdasd', like === authenticatedUser._id);
-      if (like._id == authenticatedUser._id) {
+      if (like._id === authenticatedUser._id) {
         return true;
       } else {
         return false;
@@ -31,16 +31,15 @@ const PostCard = ({ post, isPostIndex }) => {
   };
 
   return (
-    <div className="block  py-4">
-      <UserAvatar
-        className="mb-4"
-        user={{
-          name: 'Mustafa Özgün',
-          bio: ' Frontend Developer | UI Designer',
-        }}
-      />
+    <div className="block bg-white  p-4 mb-2 rounded-lg  border border-gray-100 hover:border-gray-300 transition-all">
+      {!isUserIndex && <UserAvatar className="mb-4" user={post.user} />}
 
-      <p className=" mb-2 text-[1.1rem] leading-[1.3]">{post.content}</p>
+      <Link
+        to={`/post/${post.slug + '-' + post._id}`}
+        className=" mb-2 text-[1.1rem] leading-[1.3]"
+      >
+        {post.content}
+      </Link>
       <Link
         to={`/category/${post.category.slug}`}
         className="block w-fit p-2 my-2 text-sm bg-green-50 text-green-600 hover:text-green-500 font-medium py-1 "

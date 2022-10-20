@@ -7,6 +7,7 @@ import { verifyAuthToken } from './features/auth/authApiCalls';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import PostDetails from './pages/PostDetails';
+import UserDetails from './pages/UserDetails';
 
 function App() {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />}></Route>
       <Route path="/login" element={<Login />}></Route>
+      <Route path="/user/:slug" element={<UserDetails />}></Route>
       <Route path="/post/:slug" element={<PostDetails />}></Route>
       <Route path="/category/:slug" element={<PostDetails />}></Route>
     </Routes>

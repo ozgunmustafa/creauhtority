@@ -4,13 +4,13 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require('daisyui')],
+  plugins: [require('@tailwindcss/line-clamp'), require('daisyui')],
   daisyui: {
     themes: [
       {
         emerald: {
           ...require('daisyui/src/colors/themes')['[data-theme=emerald]'],
-          'base-100': '#ffffff',
+          'base-100': '#f8fafc',
         },
       },
     ],

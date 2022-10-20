@@ -51,7 +51,6 @@ const PostDetails = () => {
         ) : (
           <>
             <PostCard post={post} isPostIndex={true}></PostCard>
-            <hr className="bg-gray-50 mt-4 mb-7" />
 
             <h3 className="font-bold text-xl mb-3 text-slate-600">
               {t('sectionTitle.comments')}
@@ -112,7 +111,6 @@ const PostDetails = () => {
               : releatedPosts?.data.map((post, index) => (
                   <Link
                     to={`/post/${post.slug + '-' + post._id}`}
-                    className="block px-4 border border-gray-200 mb-1 "
                     key={'releated-posts-' + index}
                   >
                     <PostCard post={post} />

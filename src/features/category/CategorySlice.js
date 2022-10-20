@@ -10,6 +10,12 @@ const initialState = {
     error: '',
     message: '',
   },
+  popularCategories: {
+    loading: false,
+    data: null,
+    error: '',
+    message: '',
+  },
 };
 
 export const getFeaturedCategories = createAsyncThunk(
@@ -26,7 +32,20 @@ export const getFeaturedCategories = createAsyncThunk(
     }
   },
 );
-
+export const getPopularCategories = createAsyncThunk(
+  'getPopularCategories',
+  async (load, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
+    try {
+      const res = await CategoryService.getPopularCategories();
+      thunkAPI.dispatch(setLoading(false));
+      return res.data.data;
+    } catch (err) {
+      thunkAPI.dispatch(setLoading(false));
+      console.log(err);
+    }
+  },
+);
 export const followCategory = createAsyncThunk(
   'followCategory',
   async ({ token, categoryId }, { dispatch, getState }) => {
@@ -36,7 +55,6 @@ export const followCategory = createAsyncThunk(
         {
           headers: {
             'Content-Type': 'application/json',
-            // Authorization: `Bearer: ${getState().auth.authToken}`,
             Authorization: `Bearer: ${token}`,
           },
         },
@@ -54,6 +72,19 @@ const categorySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getPopularCategories.pending, (state, action) => {
+        state.popularCategories.loading = true;
+        state.popularCategories.error = '';
+      })
+      .addCase(getPopularCategories.fulfilled, (state, action) => {
+        state.popularCategories.loading = false;
+        state.popularCategories.data = action.payload;
+      })
+      .addCase(getPopularCategories.rejected, (state, action) => {
+        state.popularCategories.loading = false;
+        state.popularCategories.error =
+          'An error occurred while featured categories';
+      })
       .addCase(getFeaturedCategories.pending, (state, action) => {
         state.featuredCategories.loading = true;
         state.featuredCategories.error = '';

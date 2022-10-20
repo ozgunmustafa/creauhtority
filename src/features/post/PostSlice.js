@@ -30,7 +30,6 @@ const initialState = {
 export const getHomeFlood = createAsyncThunk('getHomeFloodPosts', async () => {
   try {
     const res = await PostService.getFloodPosts();
-    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     console.log(err);

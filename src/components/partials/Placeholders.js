@@ -94,4 +94,33 @@ const CommentPlaceholder = ({ className }) => {
     </div>
   );
 };
-export { Placeholder, PlaceholderItem, PostPlaceholder, CommentPlaceholder };
+const UserPlaceholder = ({ className }) => (
+  <div className={`p-3 ${className}`}>
+    <Placeholder>
+      <div className="flex items-center mb-2">
+        <PlaceholderItem
+          type="rounded"
+          width="50px"
+          height="50px"
+          className="mr-1"
+        />
+        <div className="flex flex-col w-full">
+          <PlaceholderItem
+            type="line"
+            width="100%"
+            height="22px"
+            className="mb-1"
+          />
+          <PlaceholderItem type="line" width="75px" height="12px" />
+        </div>
+      </div>
+    </Placeholder>
+  </div>
+);
+export {
+  Placeholder,
+  PlaceholderItem,
+  PostPlaceholder,
+  CommentPlaceholder,
+  UserPlaceholder,
+};
