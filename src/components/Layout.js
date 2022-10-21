@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
   return (
     <React.Fragment>
       {loading && <LoadingBar type="fullsize" color="text-slate-600" />}
-      <header className="border-b border-gray-200 py-4 h-[75px] px-4 lg:px-1">
+      <header className="bg-white lg:bg-transparent lg:border-b lg:border-gray-200 py-4 h-[75px] px-4 lg:px-1">
         <div className="flex justify-between items-center container mx-auto">
           <Link to="/">
             <img src={logo} alt="" />
@@ -77,7 +77,7 @@ const Layout = ({ children }) => {
           </div>
         </div>
       </header>
-      <main className="container mx-auto py-3">{children}</main>
+      <main className="container mx-auto lg:py-3">{children}</main>
       <footer></footer>
     </React.Fragment>
   );

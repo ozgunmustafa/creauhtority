@@ -21,7 +21,9 @@ const UserDetails = () => {
   const { data: usersPosts, loading: usersPostsLoading } = useSelector(
     (state) => state.users.usersPosts,
   );
-
+  const isRealValue = (obj) => {
+    return obj && obj !== 'null' && obj !== 'undefined';
+  };
   useEffect(() => {
     dispatch(getUser(userId));
     dispatch(getUsersPosts(userId));
@@ -29,10 +31,10 @@ const UserDetails = () => {
 
   return (
     <Layout>
-      <div className="flex  flex-wrap  p-4 lg:p-0">
+      <div className="flex  flex-wrap  ">
         <div className="flex-1 lg:border-r lg:border-gray-100 lg:pr-4 mb-5">
-          <section className="mb-6 lg:hidden">
-            <div className="flex flex-col items-center justify-center p-6 rounded-md bg-white border  border-slate-200">
+          <section className="mb-3 lg:hidden ">
+            <div className="flex flex-col items-center justify-center p-6 border-t-0 bg-white border  border-slate-200">
               <div className="avatar mb-2 relative">
                 <div className="w-20 aspect-square rounded-full border border-gray-200">
                   <img
@@ -51,6 +53,27 @@ const UserDetails = () => {
               <small className="block text-gray-400 text-center mb-6">
                 {userData.about}
               </small>
+              <div className="flex justify-center  items-center mb-7 w-full">
+                <button className="flex flex-col items-center flex-1 text-gray-600 text-sm  font-medium border-r-[1px] px-3 last:border-r-0">
+                  <span className="font-medium">
+                    {userData?.following?.length}
+                  </span>
+                  {t('posts')}
+                </button>
+                <button className="flex flex-col items-center flex-1 text-gray-600 text-sm  font-medium border-r-[1px] px-3 last:border-r-0">
+                  <span className="font-medium">
+                    {userData?.followers?.length}
+                  </span>{' '}
+                  {t('followers')}
+                </button>
+                <button className="flex flex-col items-center flex-1 text-gray-600 text-sm  font-medium border-r-[1px] px-3 last:border-r-0">
+                  <span className="font-medium">
+                    {userData?.followingCategory?.length +
+                      userData?.followingUser?.length}
+                  </span>
+                  {t('following')}
+                </button>
+              </div>
 
               <div className="flex gap-2">
                 <button className="flex items-center bg-gray-100 border border-slate-200 rounded-full px-6 py-2 text-sm hover:bg-slate-300 hover:border-slate-400 hover:text-slate-600 transition-all">
@@ -62,13 +85,14 @@ const UserDetails = () => {
               </div>
             </div>
           </section>
-          <section>
+
+          <section className="px-4 lg:p-0">
             {usersPostsLoading ? (
               [...Array(5)].map((item, i) => (
                 <PostPlaceholder key={'ctg-plchldr' + i} />
               ))
             ) : usersPosts.length <= 0 ? (
-              <ContentNull />
+              <ContentNull text="Content is not here." />
             ) : (
               usersPosts.map((post) => (
                 <PostCard
@@ -81,7 +105,7 @@ const UserDetails = () => {
             )}
           </section>
         </div>
-        <div className="w-full flex-none lg:w-80 lg:pl-4 mb-5">
+        <div className="w-full flex-none lg:w-96 lg:pl-4 mb-5">
           <section className="mb-6 hidden lg:block ">
             <div className="flex flex-col items-center justify-center p-6 rounded-md bg-white border  border-slate-200">
               <div className="avatar mb-2 relative">
@@ -102,6 +126,27 @@ const UserDetails = () => {
               <small className="block text-gray-400 text-center mb-6">
                 {userData.about}
               </small>
+              <div className="flex justify-center  items-center mb-7 w-full">
+                <button className="flex flex-col items-center flex-1 text-gray-600 text-sm  font-medium border-r-[1px] px-3 last:border-r-0">
+                  <span className="font-medium">
+                    {userData?.following?.length}
+                  </span>
+                  {t('posts')}
+                </button>
+                <button className="flex flex-col items-center flex-1 text-gray-600 text-sm  font-medium border-r-[1px] px-3 last:border-r-0">
+                  <span className="font-medium">
+                    {userData?.followers?.length}
+                  </span>{' '}
+                  {t('followers')}
+                </button>
+                <button className="flex flex-col items-center flex-1 text-gray-600 text-sm  font-medium border-r-[1px] px-3 last:border-r-0">
+                  <span className="font-medium">
+                    {userData?.followingCategory?.length +
+                      userData?.followingUser?.length}
+                  </span>{' '}
+                  {t('following')}
+                </button>
+              </div>
 
               <div className="flex gap-2">
                 <button className="flex items-center bg-gray-100 border border-slate-200 rounded-full px-6 py-2 text-sm hover:bg-slate-300 hover:border-slate-400 hover:text-slate-600 transition-all">
@@ -113,7 +158,8 @@ const UserDetails = () => {
               </div>
             </div>
           </section>
-          <section className="mb-6">
+
+          <section className="mb-6 px-4">
             <h3 className="font-bold text-xl mb-3 text-slate-600">
               {t('sectionTitle.highlightCategories')}
             </h3>
@@ -129,7 +175,7 @@ const UserDetails = () => {
               ))}
             </div>
           </section>
-          <section>
+          <section className="px-4">
             <h3 className="font-bold text-xl mb-3 text-slate-600">
               {t('sectionTitle.highlightCreators')}
             </h3>

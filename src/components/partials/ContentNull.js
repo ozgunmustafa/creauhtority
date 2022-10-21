@@ -1,14 +1,16 @@
 import React from 'react';
 import Image from './Image';
 
-const ContentNull = () => {
+const ContentNull = ({ text }) => {
   return (
-    <div className="flex justify-center">
+    <div className="flex flex-col items-center  gap-8 lg:flex-row lg:justify-start py-5">
       <Image
         alt="exercitation in veniam ex ad. Commodo in ipsum sunt reprehenderi"
         url="/content-null.svg"
-        classNames="w-2/3 lg:w-4/6"
       />
+      <span className="font-bold text-[1.2rem] lg:text-[2rem] text-black">
+        {text}
+      </span>
     </div>
   );
 };

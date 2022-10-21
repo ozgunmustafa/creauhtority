@@ -12,6 +12,7 @@ import UserAvatar from './UserAvatar';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { likePost } from '../features/post/PostSlice';
+import classNames from 'classnames';
 
 const PostCard = ({ post, isPostIndex, isUserIndex, className }) => {
   const { t } = useTranslation();
@@ -31,7 +32,13 @@ const PostCard = ({ post, isPostIndex, isUserIndex, className }) => {
   };
 
   return (
-    <div className="block bg-white  p-4 mb-2 rounded-lg  border border-gray-100 hover:border-gray-300 transition-all">
+    <div
+      className={classNames({
+        'block bg-white p-4 shadow hover:shadow-sm mb-2 rounded-lg transition-all': true,
+        'shadow-sm': isUserIndex,
+        'bg-transparent p-0 shadow-none hover:shadow-none': isPostIndex,
+      })}
+    >
       {!isUserIndex && <UserAvatar className="mb-4" user={post.user} />}
 
       <Link

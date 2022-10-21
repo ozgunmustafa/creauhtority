@@ -54,7 +54,7 @@ const FloodLayout = ({ children }) => {
             : popularUsersData?.map((item, index) => (
                 <UserAvatar
                   key={'user-avatar-' + index}
-                  className="bg-white p-3 border border-gray-200 hover:border-gray-400 transition-all mb-2 rounded-lg"
+                  className="bg-white p-3 border shadow-sm hover:shadow transition-all mb-2 rounded-lg"
                   user={item}
                 />
               ))}
