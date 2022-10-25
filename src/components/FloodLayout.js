@@ -34,7 +34,6 @@ const FloodLayout = ({ children }) => {
 
   return (
     <div className="flex  flex-wrap  p-4 lg:p-0">
-      {console.log(popularUsersData)}
       <div className="flex-1 lg:border-r lg:border-gray-100 lg:pr-8 mb-5">
         {children}
       </div>

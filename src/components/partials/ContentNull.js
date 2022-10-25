@@ -7,8 +7,9 @@ const ContentNull = ({ text }) => {
       <Image
         alt="exercitation in veniam ex ad. Commodo in ipsum sunt reprehenderi"
         url="/content-null.svg"
+        classNames="w-20 lg:w-40 flex-none"
       />
-      <span className="font-bold text-[1.2rem] lg:text-[2rem] text-black">
+      <span className="lg:w-2/3 flex-auto font-bold text-[1.2rem] lg:text-[2rem] text-black">
         {text}
       </span>
     </div>

@@ -12,7 +12,20 @@ const initialState = {
   userShown: {
     message: '',
     loading: false,
-    data: {},
+    data: {
+      name: '',
+      email: '',
+      role: '',
+      links: {},
+      profile_img: '',
+      blocked: false,
+      likes: [],
+      following: [],
+      followingCategory: [],
+      followingUser: [],
+      followers: [],
+      about:'',
+    },
   },
   usersPosts: {
     message: '',
