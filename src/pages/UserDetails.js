@@ -88,7 +88,7 @@ const UserDetails = () => {
             </section>
           )}
 
-          <section className="px-4 lg:p-0">
+          <section className="lg:p-0">
             {usersPostsLoading ? (
               [...Array(5)].map((item, i) => (
                 <PostPlaceholder key={'ctg-plchldr' + i} />

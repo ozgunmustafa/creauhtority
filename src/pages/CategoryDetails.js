@@ -32,7 +32,7 @@ const CategoryDetails = () => {
             <span>....</span>
           ) : (
             <section className="mb-3 lg:hidden ">
-              <div className="flex flex-col items-center justify-center p-6 rounded-md bg-white border  border-slate-200">
+              <div className="flex flex-col items-center justify-center p-6 bg-white  border-b border-green-500">
                 <h1 className="text-xl font-medium text-gray-700 line-clamp-1 mb-1">
                   {categoryData.title}
                 </h1>
@@ -55,32 +55,34 @@ const CategoryDetails = () => {
                 </div>
 
                 <div className="flex gap-2 w-full">
-                  <button className="flex items-center justify-center w-full bg-gray-100 border border-slate-200 rounded-full px-6 py-2 text-sm hover:bg-slate-300 hover:border-slate-400 hover:text-slate-600 transition-all">
+                  <button className="flex items-center justify-center w-full bg-green-500 text-white border border-slate-200 rounded-full px-6 py-2 text-sm hover:bg-green-600 hover:border-slate-400 transition-all">
                     <FollowCategory className="mr-1 w-4 h-4" /> Follow
                   </button>
                 </div>
               </div>
             </section>
           )}
-          {categoryDataIsLoading
-            ? [...Array(5)].map((item, i) => (
-                <PostPlaceholder key={'ctg-plchldr' + i} />
-              ))
-            : categoryData?.posts?.map((post) => (
-                <PostCard
-                  post={post}
-                  key={`category-post-${post._id}`}
-                  isCategoryIndex={true}
-                  className=" border-gray-200 hover:border-gray-400"
-                />
-              ))}
+          <section className="">
+            {categoryDataIsLoading
+              ? [...Array(5)].map((item, i) => (
+                  <PostPlaceholder key={'ctg-plchldr' + i} />
+                ))
+              : categoryData?.posts?.map((post) => (
+                  <PostCard
+                    post={post}
+                    key={`category-post-${post._id}`}
+                    isCategoryIndex={true}
+                    className=" border-gray-200 hover:border-gray-400"
+                  />
+                ))}
+          </section>
         </div>
         <div className="w-full flex-none lg:w-96 lg:pl-4 mb-5">
           {categoryDataIsLoading ? (
             <span>....</span>
           ) : (
             <section className="mb-6 hidden lg:block ">
-              <div className="flex flex-col items-center justify-center p-6 rounded-md bg-white border  border-slate-200">
+              <div className="flex flex-col items-center justify-center p-6 rounded-md bg-white border  border-green-500">
                 <h1 className="text-xl font-medium text-gray-700 line-clamp-1 mb-1">
                   {categoryData.title}
                 </h1>
@@ -100,17 +102,10 @@ const CategoryDetails = () => {
                     </span>{' '}
                     {t('followers')}
                   </button>
-                  {/* <button className="flex flex-col items-center flex-1 text-gray-600 text-sm  font-medium border-r-[1px] px-3 last:border-r-0">
-                    <span className="font-medium">
-                      {categoryData.followingCategory.length +
-                        categoryData.followingUser.length}
-                    </span>{' '}
-                    {t('following')}
-                  </button> */}
                 </div>
 
                 <div className="flex gap-2 w-full">
-                  <button className="flex items-center justify-center w-full bg-gray-100 border border-slate-200 rounded-full px-6 py-2 text-sm hover:bg-slate-300 hover:border-slate-400 hover:text-slate-600 transition-all">
+                  <button className="flex items-center justify-center w-full bg-green-500 text-white border border-slate-200 rounded-full px-6 py-2 text-sm hover:bg-green-600 hover:border-slate-400 transition-all">
                     <FollowCategory className="mr-1 w-4 h-4" /> Follow
                   </button>
                 </div>

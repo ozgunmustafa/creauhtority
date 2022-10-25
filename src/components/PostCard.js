@@ -40,7 +40,7 @@ const PostCard = ({
   return (
     <div
       className={classNames({
-        'block bg-white p-4 shadow hover:shadow-sm mb-2 rounded-lg transition-all': true,
+        'block bg-white p-4 shadow-sm lg:hover:shadow-sm mb-2 lg:rounded-lg transition-all': true,
         'shadow-sm': isUserIndex,
         'bg-transparent p-0 shadow-none hover:shadow-none': isPostIndex,
       })}

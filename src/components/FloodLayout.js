@@ -33,12 +33,12 @@ const FloodLayout = ({ children }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex  flex-wrap  p-4 lg:p-0">
+    <div className="flex  flex-wrap  lg:p-0">
       <div className="flex-1 lg:border-r lg:border-gray-100 lg:pr-8 mb-5">
         {children}
       </div>
       <div className="w-full flex-none lg:w-80 lg:pl-4 mb-5">
-        <section className="">
+        <section className="px-4 lg:px-0">
           <h3 className="font-bold text-xl mb-3 text-slate-600">
             {t('sectionTitle.highlightCreators')}
           </h3>
@@ -53,13 +53,13 @@ const FloodLayout = ({ children }) => {
             : popularUsersData?.map((item, index) => (
                 <UserAvatar
                   key={'user-avatar-' + index}
-                  className="bg-white p-3 border shadow-sm hover:shadow transition-all mb-2 rounded-lg"
+                  className="bg-white p-3 border border-gray-100 shadow-sm hover:shadow transition-all mb-2 rounded-lg"
                   user={item}
                 />
               ))}
         </section>
         <hr className="bg-gray-100 my-5" />
-        <section>
+        <section className="px-4 lg:px-0 py-4">
           <h3 className="font-bold text-xl mb-3 text-slate-600">
             {t('sectionTitle.popularCategories')}
           </h3>

@@ -43,7 +43,7 @@ const Home = () => {
   return (
     <Layout>
       <FloodLayout>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap px-4 lg:px-0 py-4">
           {loading
             ? [...Array(5)].map((item, i) => (
                 <Placeholder key={'ctg-plchldr' + i} className="mb-2 mr-2">
