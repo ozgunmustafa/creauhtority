@@ -3,6 +3,7 @@ import React from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BsCheck2 } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { followCategory } from '../../features/category/CategorySlice';
 import { getFeaturedCategories } from '../../features/category/CategorySlice';
 
@@ -18,7 +19,9 @@ const CategoryPill = ({ category, active }) => {
         'text-blue-800  bg-blue-100': active,
       })}
     >
-      {category.title}
+      <Link to={`category/${category.slug + '-' + category._id}`}>
+        {category.title}
+      </Link>
       <button
         className="p-2"
         onClick={() => {

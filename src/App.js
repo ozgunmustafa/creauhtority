@@ -3,9 +3,11 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { verifyAuthToken } from './features/auth/authApiCalls';
+import CategoryDetails from './pages/CategoryDetails';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
+import NotFound from './pages/NotFound';
 import PostDetails from './pages/PostDetails';
 import UserDetails from './pages/UserDetails';
 
@@ -33,7 +35,8 @@ function App() {
       <Route path="/login" element={<Login />}></Route>
       <Route path="/user/:slug" element={<UserDetails />}></Route>
       <Route path="/post/:slug" element={<PostDetails />}></Route>
-      <Route path="/category/:slug" element={<PostDetails />}></Route>
+      <Route path="/category/:slug" element={<CategoryDetails />}></Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

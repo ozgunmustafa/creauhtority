@@ -10,6 +10,12 @@ const initialState = {
     error: '',
     message: '',
   },
+  categoryDetails: {
+    loading: true,
+    data: {},
+    message: '',
+  },
+
   popularCategories: {
     loading: false,
     data: null,
@@ -17,7 +23,22 @@ const initialState = {
     message: '',
   },
 };
+export const getCategoryDetails = createAsyncThunk(
+  'getCategory',
+  async (categoryId, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
 
+    try {
+      const res = await CategoryService.getSingleCategory(categoryId);
+      thunkAPI.dispatch(setLoading(false));
+
+      return res.data.data;
+    } catch (err) {
+      thunkAPI.dispatch(setLoading(false));
+      console.log(err);
+    }
+  },
+);
 export const getFeaturedCategories = createAsyncThunk(
   'getFeaturedCategories',
   async (load, thunkAPI) => {
@@ -72,6 +93,19 @@ const categorySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getCategoryDetails.pending, (state, action) => {
+        state.categoryDetails.loading = true;
+        state.categoryDetails.message = 'Data Fetching';
+      })
+      .addCase(getCategoryDetails.fulfilled, (state, action) => {
+        state.categoryDetails.loading = false;
+        state.categoryDetails.message = 'Data Fetched';
+        state.categoryDetails.data = action.payload;
+      })
+      .addCase(getCategoryDetails.rejected, (state, action) => {
+        state.categoryDetails.loading = false;
+        state.categoryDetails.message = 'An error occured when data fetching';
+      })
       .addCase(getPopularCategories.pending, (state, action) => {
         state.popularCategories.loading = true;
         state.popularCategories.error = '';

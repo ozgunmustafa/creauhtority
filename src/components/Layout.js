@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import logo from '../logo.svg';
 import LoadingBar from './partials/LoadingBar';
 
+
 const Layout = ({ children }) => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();

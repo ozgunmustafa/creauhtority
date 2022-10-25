@@ -14,7 +14,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { likePost } from '../features/post/PostSlice';
 import classNames from 'classnames';
 
-const PostCard = ({ post, isPostIndex, isUserIndex, className }) => {
+const PostCard = ({
+  post,
+  isPostIndex,
+  isUserIndex,
+  isCategoryIndex,
+  className,
+}) => {
   const { t } = useTranslation();
   const { authenticatedUser } = useSelector((state) => state.auth);
 
@@ -47,12 +53,15 @@ const PostCard = ({ post, isPostIndex, isUserIndex, className }) => {
       >
         {post.content}
       </Link>
-      <Link
-        to={`/category/${post.category.slug}`}
-        className="block w-fit p-2 my-2 text-sm bg-green-50 text-green-600 hover:text-green-500 font-medium py-1 "
-      >
-        #{post.category.title}
-      </Link>
+      {!isCategoryIndex && (
+        <Link
+          to={`/category/${post.category.slug + '-' + post.category._id}`}
+          className="block w-fit p-2 my-2 text-sm bg-green-50 text-green-600 hover:text-green-500 font-medium py-1 "
+        >
+          #{post.category.title}
+        </Link>
+      )}
+
       {(post.likes.length > 0 || post.comments.length > 0) && (
         <div className="flex pt-2">
           {post.likes.length > 0 && (
