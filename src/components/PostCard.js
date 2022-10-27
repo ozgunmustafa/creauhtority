@@ -4,7 +4,6 @@ import {
   Comments,
   Like,
   LikeFilled,
-  Reply,
   Share,
 } from './partials/Icons';
 import { useTranslation } from 'react-i18next';
@@ -28,7 +27,6 @@ const PostCard = ({
 
   const isUserLikedPost = (postt) => {
     post.likes.map((like) => {
-      console.log('1xasdasd', like === authenticatedUser._id);
       if (like._id === authenticatedUser._id) {
         return true;
       } else {
@@ -42,7 +40,8 @@ const PostCard = ({
       className={classNames({
         'block bg-white p-4 shadow-sm lg:hover:shadow-sm mb-2 lg:rounded-lg transition-all': true,
         'shadow-sm': isUserIndex,
-        'bg-transparent p-0 shadow-none hover:shadow-none': isPostIndex,
+        'bg-white lg:bg-transparent lg:p-0 p-5 !shadow-none !hover:shadow-none ':
+          isPostIndex,
       })}
     >
       {!isUserIndex && <UserAvatar className="mb-4" user={post.user} />}
@@ -84,7 +83,7 @@ const PostCard = ({
         <button
           className="w-[35px] h-[32px] flex items-center justify-center bg-gray-100 shadow-sm p-2 rounded-xl text-slate-600 mr-4"
           onClick={() => {
-            dispatch(likePost(post._id));
+            dispatch(likePost(post?._id));
           }}
         >
           {post.likes.length > 0 ? (

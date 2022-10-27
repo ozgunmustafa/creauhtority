@@ -1,18 +1,40 @@
 import { useTranslation } from 'react-i18next';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLang, setLoading } from '../features/settings/siteSettingSlice';
+import {
+  closeLoginModal,
+  setLang,
+  setLoading,
+} from '../features/settings/siteSettingSlice';
 import { Link } from 'react-router-dom';
 import logo from '../logo.svg';
 import LoadingBar from './partials/LoadingBar';
+import Modal from 'react-modal';
+import { TextField } from './partials/TextField';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { loginCall } from '../features/auth/authApiCalls';
 
 
 const Layout = ({ children }) => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
+  const loginValidation = Yup.object().shape({
+    email: Yup.string()
+      .email(() => t('validation.invalid', { inputName: t('email') }))
+      .required(() => t('validation.required', { inputName: t('email') })),
+    password: Yup.string()
+      .min(6, () => t('validation.minLength', { count: '6' }))
+      .required(() =>
+        t('validation.required', { inputName: t('password.key') }),
+      ),
+  });
 
-  const { language, theme, loading } = useSelector((state) => state.settings);
+  const { language, theme, loading, loginModalIsOpen } = useSelector(
+    (state) => state.settings,
+  );
   const { authenticatedUser, authToken } = useSelector((state) => state.auth);
+
   const setUILanguage = (lng) => {
     dispatch(setLoading(true));
     setTimeout(() => {
@@ -21,10 +43,80 @@ const Layout = ({ children }) => {
       dispatch(setLoading(false));
     }, 1000);
   };
+  useEffect(() => {
+    Modal.setAppElement('body');
+  });
 
   return (
     <React.Fragment>
       {loading && <LoadingBar type="fullsize" color="text-slate-600" />}
+      <Modal
+        isOpen={loginModalIsOpen}
+        onRequestClose={() => {
+          dispatch(closeLoginModal());
+        }}
+        contentLabel="My dialog"
+        className="mymodal"
+        overlayClassName="myoverlay"
+        closeTimeoutMS={500}
+      >
+        <div className="  p-4 rounded-lg lg:p-10 lg:border lg:border-zinc-300 lg:bg-white">
+          <h1 className="text-3xl font-medium"> {t('login')}</h1>
+          <Formik
+            initialValues={{ email: '', password: '' }}
+            validationSchema={loginValidation}
+            onSubmit={(values, { setSubmitting }) => {
+              dispatch(loginCall(values)).then((res) => {
+                setSubmitting(false);
+              });
+            }}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <div className="py-6 ">
+                  <div className="mb-3">
+                    <TextField
+                      label="Email"
+                      name="email"
+                      type="email"
+                      placeholder={t('placeholder', {
+                        inputName: `${t('email').toLowerCase()}`,
+                      })}
+                    />
+                  </div>
+
+                  <div className="mb-3">
+                    <TextField
+                      label="Password"
+                      name="password"
+                      type="password"
+                      placeholder={t('placeholder', {
+                        inputName: `${t('password.key').toLowerCase()}`,
+                      })}
+                    />
+                  </div>
+                </div>
+                <button
+                  className="btn capitalize rounded-full"
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  {t('login')}
+                </button>
+              </form>
+            )}
+          </Formik>
+
+        </div>
+      </Modal>
       <header className="bg-white lg:bg-transparent lg:border-b lg:border-gray-200 py-4 h-[75px] px-4 lg:px-1">
         <div className="flex justify-between items-center container mx-auto">
           <Link to="/">
@@ -53,7 +145,7 @@ const Layout = ({ children }) => {
             ) : (
               <Link
                 to="/login"
-                className="bg-slate-300 py-2 px-4 mr-3 text-slate-500 rounded-full "
+                className="bg-slate-200 py-2 px-4 mr-3 text-slate-500 rounded-full "
               >
                 {t('login')}
               </Link>

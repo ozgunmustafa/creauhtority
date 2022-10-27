@@ -13,6 +13,9 @@ class CategoryService {
   getSingleCategory(id) {
     return api.get(`/categories/${id}`);
   }
+  followCategory(categoryId) {
+    return api.get(`/categories/${categoryId}/follow`);
+  }
 }
 
 export default new CategoryService();

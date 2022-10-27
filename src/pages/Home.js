@@ -28,7 +28,7 @@ const Home = () => {
   const { authenticatedUser } = useSelector((state) => state.auth);
 
   const isUserFollowingCategory = (category) => {
-    if (category.followers.includes(authenticatedUser._id)) {
+    if (category.followers.includes(authenticatedUser?._id)) {
       return true;
     } else {
       return;
@@ -66,7 +66,7 @@ const Home = () => {
             : floodPosts?.map((post) => (
                 <PostCard
                   post={post}
-                  key={`flood-${post._id}`}
+                  key={`flood-post-${post._id}`}
                   className=" border-gray-200 hover:border-gray-400"
                 />
               ))}

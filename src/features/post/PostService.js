@@ -15,6 +15,9 @@ class PostService {
   likePost(postId) {
     return api.get(`/posts/${postId}/like`);
   }
+  createComment(postId) {
+    return api.post(`/posts/${postId}/comments`)
+  }
 }
 
 export default new PostService();

@@ -25,9 +25,7 @@ const CategoryPill = ({ category, active }) => {
       <button
         className="p-2"
         onClick={() => {
-          dispatch(
-            followCategory({ token: authToken, categoryId: category._id }),
-          );
+          dispatch(followCategory(category._id));
           setTimeout(() => {
             dispatch(getFeaturedCategories());
           }, 500);

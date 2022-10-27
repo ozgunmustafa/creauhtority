@@ -1,23 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Layout from '../components/Layout';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { PostPlaceholder } from '../components/partials/Placeholders';
+import {
+  Placeholder,
+  PlaceholderItem,
+  PostPlaceholder,
+} from '../components/partials/Placeholders';
 import PostCard from '../components/PostCard';
-import { getCategoryDetails } from '../features/category/CategorySlice';
+import {
+  followCategory,
+  getCategoryDetails,
+} from '../features/category/CategorySlice';
 import { FollowCategory } from '../components/partials/Icons';
+import classNames from 'classnames';
 const CategoryDetails = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const { slug } = useParams();
   const categoryId = slug.split('-').slice(-1)[0];
-  console.log(categoryId);
+  const [following, setFollowing] = useState(false);
 
   const { data: categoryData, loading: categoryDataIsLoading } = useSelector(
     (state) => state.categories.categoryDetails,
   );
+  const { authenticatedUser } = useSelector((state) => state.auth);
+
+  const isUserFollowingCategory = (category) => {
+    if (category.followers.includes(authenticatedUser?._id)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const onChangeFollow = (item) => {
+    dispatch(followCategory(item._id));
+    setTimeout(() => {
+      dispatch(getCategoryDetails(categoryId));
+    });
+  };
 
   useEffect(() => {
     dispatch(getCategoryDetails(categoryId));
@@ -25,11 +49,15 @@ const CategoryDetails = () => {
 
   return (
     <Layout>
-      {console.log(categoryData)}
       <div className="flex  flex-wrap  ">
         <div className="flex-1 lg:border-r lg:border-gray-100 lg:pr-4 mb-5">
           {categoryDataIsLoading ? (
-            <span>....</span>
+            <Placeholder className="lg:hidden  p-6 flex flex-col items-center justify-center w-full h-[250px] bg-white rounded-lg border-b border-green-500">
+              <PlaceholderItem className="w-2/3 h-[38px] rounded-full bg-gray-100 mb-3" />
+              <PlaceholderItem className="w-full h-[20px] rounded-full bg-gray-100 mb-1" />
+              <PlaceholderItem className="w-1/2 h-[20px] rounded-full bg-gray-100 mb-3" />
+              <PlaceholderItem className="w-full h-[40px] rounded-full !bg-gray-200" />
+            </Placeholder>
           ) : (
             <section className="mb-3 lg:hidden ">
               <div className="flex flex-col items-center justify-center p-6 bg-white  border-b border-green-500">
@@ -55,8 +83,17 @@ const CategoryDetails = () => {
                 </div>
 
                 <div className="flex gap-2 w-full">
-                  <button className="flex items-center justify-center w-full bg-green-500 text-white border border-slate-200 rounded-full px-6 py-2 text-sm hover:bg-green-600 hover:border-slate-400 transition-all">
-                    <FollowCategory className="mr-1 w-4 h-4" /> Follow
+                  <button
+                    onClick={() => {
+                      onChangeFollow(categoryData);
+                    }}
+                    className={classNames({
+                      'flex items-center justify-center w-full  border border-slate-200 rounded-full px-6 py-2 text-sm hover:bg-green-600 hover:text-white transition-all': true,
+                      'bg-green-600 text-white':
+                        isUserFollowingCategory(categoryData),
+                    })}
+                  >
+                    <FollowCategory className="mr-1 w-4 h-4" /> {t('follow')}
                   </button>
                 </div>
               </div>
@@ -79,7 +116,12 @@ const CategoryDetails = () => {
         </div>
         <div className="w-full flex-none lg:w-96 lg:pl-4 mb-5">
           {categoryDataIsLoading ? (
-            <span>....</span>
+            <Placeholder className="p-6 flex flex-col items-center justify-center w-full h-[250px] bg-white rounded-lg border border-green-500 ">
+              <PlaceholderItem className="w-2/3 h-[38px] rounded-full bg-gray-100 mb-3" />
+              <PlaceholderItem className="w-full h-[20px] rounded-full bg-gray-100 mb-1" />
+              <PlaceholderItem className="w-1/2 h-[20px] rounded-full bg-gray-100 mb-3" />
+              <PlaceholderItem className="w-full h-[40px] rounded-full !bg-gray-200" />
+            </Placeholder>
           ) : (
             <section className="mb-6 hidden lg:block ">
               <div className="flex flex-col items-center justify-center p-6 rounded-md bg-white border  border-green-500">
@@ -105,8 +147,17 @@ const CategoryDetails = () => {
                 </div>
 
                 <div className="flex gap-2 w-full">
-                  <button className="flex items-center justify-center w-full bg-green-500 text-white border border-slate-200 rounded-full px-6 py-2 text-sm hover:bg-green-600 hover:border-slate-400 transition-all">
-                    <FollowCategory className="mr-1 w-4 h-4" /> Follow
+                  <button
+                    onClick={() => {
+                      onChangeFollow(categoryData);
+                    }}
+                    className={classNames({
+                      'flex items-center justify-center w-full border border-green-500 bg-green-50 text-green-600 font-medium rounded-full px-6 py-2 text-sm hover:bg-green-600 hover:text-white transition-all': true,
+                      'border-green-500 bg-green-600 text-white':
+                        isUserFollowingCategory(categoryData),
+                    })}
+                  >
+                    <FollowCategory className="mr-1 w-4 h-4" /> {t('follow')}
                   </button>
                 </div>
               </div>

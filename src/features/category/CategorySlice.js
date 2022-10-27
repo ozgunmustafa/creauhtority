@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { setLoading } from '../settings/siteSettingSlice';
+import { openLoginModal, setLoading } from '../settings/siteSettingSlice';
 import CategoryService from './CategoryService';
 
 const initialState = {
@@ -69,18 +69,15 @@ export const getPopularCategories = createAsyncThunk(
 );
 export const followCategory = createAsyncThunk(
   'followCategory',
-  async ({ token, categoryId }, { dispatch, getState }) => {
+  async (categoryId, { dispatch, getState }) => {
     try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}/categories/${categoryId}/follow`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer: ${token}`,
-          },
-        },
-      );
-      return res.data;
+      const userAuth = getState().auth.authToken;
+      if (userAuth) {
+        const res = await CategoryService.followCategory(categoryId);
+        return res.data;
+      } else {
+        dispatch(openLoginModal());
+      }
     } catch (err) {
       console.err(err);
     }

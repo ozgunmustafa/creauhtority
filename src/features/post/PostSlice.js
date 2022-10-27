@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { openLoginModal, setLoading } from '../settings/siteSettingSlice';
 import PostService from './PostService';
 
 const initialState = {
@@ -72,15 +73,22 @@ export const getCategoryReleatedPosts = createAsyncThunk(
   },
 );
 
-export const likePost = createAsyncThunk('likePost', async (postId) => {
-  try {
-    const res = await PostService.likePost(postId);
-    console.log('zzzzz', res);
-    return res.data;
-  } catch (err) {
-    console.err(err);
-  }
-});
+export const likePost = createAsyncThunk(
+  'likePost',
+  async (postId, { dispatch, getState }) => {
+    try {
+      const userAuth = getState().auth.authToken;
+      if (userAuth) {
+        const res = await PostService.likePost(postId);
+        return res.data;
+      } else {
+        dispatch(openLoginModal());
+      }
+    } catch (err) {
+      console.err(err);
+    }
+  },
+);
 
 const postSlice = createSlice({
   name: 'post',

@@ -4,6 +4,7 @@ const initialState = {
   theme: 'light',
   language: 'tr',
   loading: false,
+  loginModalIsOpen: false,
 };
 
 export const settingSlice = createSlice({
@@ -19,9 +20,15 @@ export const settingSlice = createSlice({
     setLoading: (state, action) => {
       state.loading = action.payload;
     },
+    openLoginModal: (state, action) => {
+      state.loginModalIsOpen = true;
+    },
+    closeLoginModal: (state, action) => {
+      state.loginModalIsOpen = false;
+    },
   },
 });
 
-export const { setTheme, setLang, setLoading } = settingSlice.actions;
+export const { setTheme, setLang, setLoading,openLoginModal,closeLoginModal } = settingSlice.actions;
 
 export default settingSlice.reducer;

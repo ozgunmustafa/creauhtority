@@ -90,7 +90,6 @@ const Login = () => {
                     </div>
                   </div>
                   <button className="btn capitalize rounded-full" type="submit" disabled={isSubmitting}>
-
                     {t('login')}
                   </button>
                 </form>
