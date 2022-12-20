@@ -18,6 +18,7 @@ import {
 } from '../components/partials/Placeholders';
 import { Like, LikeFilled, Reply } from '../components/partials/Icons';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import BlankProfilePicture from '../components/partials/BlankProfilePicture';
 const PostDetails = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -71,15 +72,19 @@ const PostDetails = () => {
                       className="flex max-w-[75%]  py-2  mb-2 w-fit"
                       key={comment._id}
                     >
-                      <div className=" avatar mr-2">
-                        <div className="w-8 h-8 aspect-square rounded-full">
-                          <img
-                            src="https://i.pravatar.cc/300"
-                            // src="https://placeimg.com/192/192/people"
-                            alt="Tailwind-CSS-Avatar-component"
-                          />
-                        </div>
-                      </div>
+                      {comment?.user?.profile_img ? (
+                        <img
+                          src={comment?.user?.profile_img}
+                          // src="https://placeimg.com/192/192/people"
+                          alt={comment.user.name + ' ' + comment.user.about}
+                        />
+                      ) : (
+                        <BlankProfilePicture
+                          text={comment?.user?.name}
+                          size="40px"
+                          classNames='mr-2'
+                        />
+                      )}
                       <p className="">
                         <span className="font-medium text-slate-700 leading-[1]">
                           {comment.user.name}

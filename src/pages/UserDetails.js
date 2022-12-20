@@ -12,6 +12,7 @@ import {
 } from '../components/partials/Placeholders';
 import PostCard from '../components/PostCard';
 import ContentNull from '../components/partials/ContentNull';
+import BlankProfilePicture from '../components/partials/BlankProfilePicture';
 const UserDetails = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -127,18 +128,29 @@ const UserDetails = () => {
           ) : (
             <section className="mb-6 hidden lg:block ">
               <div className="flex flex-col items-center justify-center p-6 rounded-md bg-white border  border-slate-200">
-                <div className="avatar mb-2 relative">
-                  <div className="w-20 aspect-square rounded-full border border-gray-200">
-                    <img
-                      src="https://i.pravatar.cc/300"
-                      // src="https://placeimg.com/192/192/people"
-                      alt="Voluptate in velit aute quis consectetur magna occaecat commodo labore velit."
-                    />
+                {userData?.profile_img ? (
+                  <div className="avatar mb-2 relative">
+                    <div className="w-20 aspect-square rounded-full border border-gray-200">
+                      {userData?.profile_img ? (
+                        <img
+                          src={userData?.profile_img}
+                          alt={userData.name + ' ' + userData.about}
+                        />
+                      ) : (
+                        <BlankProfilePicture
+                          text={userData?.name}
+                          size="40px"
+                        />
+                      )}
+                    </div>
+                    <span className="bg-amber-200 text-slate-600 leading-[100%] p-1 px-2 rounded-full absolute -bottom-2 left-1/2 -translate-x-1/2 font-sans   text-[12px]">
+                      creathor
+                    </span>
                   </div>
-                  <span className="bg-amber-200 text-slate-600 leading-[100%] p-1 px-2 rounded-full absolute -bottom-2 left-1/2 -translate-x-1/2 font-sans   text-[12px]">
-                    creathor
-                  </span>
-                </div>
+                ) : (
+                  <BlankProfilePicture text={userData?.name} size="60px" />
+                )}
+
                 <h1 className="text-xl font-medium text-gray-700 line-clamp-1 mb-1">
                   {userData.name}
                 </h1>

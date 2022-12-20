@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 
 import { getFeaturedCategories } from '../features/category/CategorySlice';
 import { getHomeFlood } from '../features/post/PostSlice';
+import BlankProfilePicture from '../components/partials/BlankProfilePicture';
 
 const Home = () => {
   const dispatch = useDispatch();
