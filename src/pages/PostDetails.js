@@ -74,7 +74,7 @@ const PostDetails = () => {
                       <div className=" avatar mr-2">
                         <div className="w-8 h-8 aspect-square rounded-full">
                           <img
-                            src="https://joeschmoe.io/api/v1/male/random"
+                            src="https://i.pravatar.cc/300"
                             // src="https://placeimg.com/192/192/people"
                             alt="Tailwind-CSS-Avatar-component"
                           />

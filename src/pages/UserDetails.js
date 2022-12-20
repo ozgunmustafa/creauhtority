@@ -50,7 +50,7 @@ const UserDetails = () => {
                 <div className="avatar mb-2 relative">
                   <div className="w-20 aspect-square rounded-full border border-gray-200">
                     <img
-                      src="https://joeschmoe.io/api/v1/male/random"
+                      src="https://i.pravatar.cc/300"
                       // src="https://placeimg.com/192/192/people"
                       alt="Voluptate in velit aute quis consectetur magna occaecat commodo labore velit."
                     />
@@ -130,7 +130,7 @@ const UserDetails = () => {
                 <div className="avatar mb-2 relative">
                   <div className="w-20 aspect-square rounded-full border border-gray-200">
                     <img
-                      src="https://joeschmoe.io/api/v1/male/random"
+                      src="https://i.pravatar.cc/300"
                       // src="https://placeimg.com/192/192/people"
                       alt="Voluptate in velit aute quis consectetur magna occaecat commodo labore velit."
                     />

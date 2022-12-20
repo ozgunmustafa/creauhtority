@@ -14,7 +14,7 @@ const UserAvatar = ({ className, user }) => {
       <div className=" avatar mr-2">
         <div className="w-10 aspect-square rounded-full">
           <img
-            src="https://joeschmoe.io/api/v1/male/random"
+            src="https://i.pravatar.cc/300"
             // src="https://placeimg.com/192/192/people"
             alt={user.name + ' ' + user.about}
           />
