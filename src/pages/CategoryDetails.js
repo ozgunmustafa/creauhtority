@@ -15,6 +15,7 @@ import {
 } from '../features/category/CategorySlice';
 import { FollowCategory } from '../components/partials/Icons';
 import classNames from 'classnames';
+import ContentNull from '../components/partials/ContentNull';
 const CategoryDetails = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -100,18 +101,22 @@ const CategoryDetails = () => {
             </section>
           )}
           <section className="">
-            {categoryDataIsLoading
-              ? [...Array(5)].map((item, i) => (
-                  <PostPlaceholder key={'ctg-plchldr' + i} />
-                ))
-              : categoryData?.posts?.map((post) => (
-                  <PostCard
-                    post={post}
-                    key={`category-post-${post._id}`}
-                    isCategoryIndex={true}
-                    className=" border-gray-200 hover:border-gray-400"
-                  />
-                ))}
+            {categoryDataIsLoading ? (
+              [...Array(5)].map((item, i) => (
+                <PostPlaceholder key={'ctg-plchldr' + i} />
+              ))
+            ) : categoryData.posts?.length <= 0 ? (
+              <ContentNull text="Content is not here." />
+            ) : (
+              categoryData?.posts?.map((post) => (
+                <PostCard
+                  post={post}
+                  key={`category-post-${post._id}`}
+                  isCategoryIndex={true}
+                  className=" border-gray-200 hover:border-gray-400"
+                />
+              ))
+            )}
           </section>
         </div>
         <div className="w-full flex-none lg:w-96 lg:pl-4 mb-5">
@@ -124,7 +129,7 @@ const CategoryDetails = () => {
             </Placeholder>
           ) : (
             <section className="mb-6 hidden lg:block ">
-              <div className="flex flex-col items-center justify-center p-6 rounded-md bg-white border  border-green-500">
+              <div className="flex flex-col items-center justify-center p-6 rounded-md bg-white border  border-slate-200">
                 <h1 className="text-xl font-medium text-gray-700 line-clamp-1 mb-1">
                   {categoryData.title}
                 </h1>
@@ -143,7 +148,8 @@ const CategoryDetails = () => {
                       {categoryData.followers.length}
                     </span>{' '}
                     {t('followers')}
-                  </button>
+                    </button>
+                    
                 </div>
 
                 <div className="flex gap-2 w-full">
@@ -153,7 +159,7 @@ const CategoryDetails = () => {
                     }}
                     className={classNames({
                       'flex items-center justify-center w-full border border-green-500 bg-green-50 text-green-600 font-medium rounded-full px-6 py-2 text-sm hover:bg-green-600 hover:text-white transition-all': true,
-                      'border-green-500 bg-green-600 text-white':
+                      'border-slate-500 bg-green-600 text-white':
                         isUserFollowingCategory(categoryData),
                     })}
                   >

@@ -5,7 +5,11 @@ import { RiUserFollowLine, RiMailSendLine } from 'react-icons/ri';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser, getUsersPosts } from '../features/user/userSlice';
-import { PostPlaceholder } from '../components/partials/Placeholders';
+import {
+  Placeholder,
+  PlaceholderItem,
+  PostPlaceholder,
+} from '../components/partials/Placeholders';
 import PostCard from '../components/PostCard';
 import ContentNull from '../components/partials/ContentNull';
 const UserDetails = () => {
@@ -34,7 +38,12 @@ const UserDetails = () => {
       <div className="flex  flex-wrap  ">
         <div className="flex-1 lg:border-r lg:border-gray-100 lg:pr-4 mb-5">
           {userIsLoading ? (
-            <p>Loading..............</p>
+            <Placeholder className="p-6 flex flex-col items-center justify-center w-full h-[250px] bg-white rounded-lg border border-green-500 ">
+              <PlaceholderItem className="w-[60] h-[60px] rounded-full bg-gray-100 mb-3" />
+              <PlaceholderItem className="w-full h-[20px] rounded-full bg-gray-100 mb-1" />
+              <PlaceholderItem className="w-1/2 h-[20px] rounded-full bg-gray-100 mb-3" />
+              <PlaceholderItem className="w-full h-[40px] rounded-full !bg-gray-200" />
+            </Placeholder>
           ) : (
             <section className="mb-3 lg:hidden ">
               <div className="flex flex-col items-center justify-center p-6 border-t-0 bg-white border  border-slate-200">
@@ -109,7 +118,12 @@ const UserDetails = () => {
         </div>
         <div className="w-full flex-none lg:w-96 lg:pl-4 mb-5">
           {userIsLoading ? (
-            <span>....</span>
+            <Placeholder className="p-6 flex flex-col items-center justify-center w-full h-[250px] bg-white rounded-lg border border-green-500 ">
+              <PlaceholderItem className="w-[60] h-[60px] rounded-full bg-gray-100 mb-3" />
+              <PlaceholderItem className="w-full h-[20px] rounded-full bg-gray-100 mb-1" />
+              <PlaceholderItem className="w-1/2 h-[20px] rounded-full bg-gray-100 mb-3" />
+              <PlaceholderItem className="w-full h-[40px] rounded-full !bg-gray-200" />
+            </Placeholder>
           ) : (
             <section className="mb-6 hidden lg:block ">
               <div className="flex flex-col items-center justify-center p-6 rounded-md bg-white border  border-slate-200">

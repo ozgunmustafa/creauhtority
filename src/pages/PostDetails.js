@@ -100,7 +100,7 @@ const PostDetails = () => {
                     </div>
                   ))}
               <div className="flex mt-4">
-                <div className="w-8 h-8 mr-2 border aspect-square rounded-full">
+                <div className="w-11 h-11 mr-2 border aspect-square rounded-full">
                   <img
                     src="https://placeimg.com/192/192/people"
                     className="rounded-full"

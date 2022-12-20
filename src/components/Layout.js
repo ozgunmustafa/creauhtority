@@ -15,7 +15,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { loginCall } from '../features/auth/authApiCalls';
 
-
 const Layout = ({ children }) => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
@@ -114,13 +113,12 @@ const Layout = ({ children }) => {
               </form>
             )}
           </Formik>
-
         </div>
       </Modal>
       <header className="bg-white lg:bg-transparent lg:border-b lg:border-gray-200 py-4 h-[75px] px-4 lg:px-1">
         <div className="flex justify-between items-center container mx-auto">
-          <Link to="/">
-            <img src={logo} alt="" />
+          <Link to="/" className="w-[80px] min-w-[80px]">
+            <img src={logo} alt="" className="w-full " />
           </Link>
 
           <div className="flex items-center">
@@ -138,7 +136,7 @@ const Layout = ({ children }) => {
                   </div>
                 </div>
 
-                <span className="mx-1 font-medium text-slate-500">
+                <span className="mx-1 font-medium text-slate-500 line-clamp-1">
                   {authenticatedUser.name}
                 </span>
               </Link>
